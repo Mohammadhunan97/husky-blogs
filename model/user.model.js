@@ -27,18 +27,18 @@ let UserSchema = new Schema({
 	},
 	password: {
 		type: String,
-		required: false,
+		required: false, //only required for local users
 		unique: false,
 		default: null
 	},
 	profile_pic: {
-		type: String, // url of the image
+		type: String, 
 		required: false,
 		unique: false,
 		default: '/profilepic.png' 
 	},
 	following: {
-		type: [Number], //array of numbers
+		type: [Number], 
 		required: false,
 		unique: false
 	},

@@ -1,0 +1,17 @@
+body{
+	background-color: #f1c40f;
+}
+.logo{
+	text-align: center;
+	color: #fff;
+}
+label{
+	display: block;
+}
+.loginform{
+	text-align: center;
+}
+.form-control{
+	max-width: 40vw;
+	display: inline;
+}
