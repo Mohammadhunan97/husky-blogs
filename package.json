@@ -1,0 +1,20 @@
+{
+  "name": "sampleblogs",
+  "version": "1.0.0",
+  "description": "node.js secure blogging",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app"
+  },
+  "keywords": [
+    "node.js",
+    "blogging"
+  ],
+  "author": "mohammad hunan <mohammadhunan@gmail.com | @moe.mkr>",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "mongoose": "^4.13.1"
+  }
+}
