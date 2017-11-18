@@ -7,8 +7,24 @@
 </head>
 <body>
 	<h1 class="logo">Husky Blogs</h1>
-	<% include ./partials/loginform %>
+	<div id="signup">
+		<% include ./partials/signup %>
+	</div>
+	<div id="login">
+		<% include ./partials/login %>
+	</div>
 
+	<br/>
+	<button class="social-button" id="local-btn"> </button>
+	<br/>
+	<a href="/auth/facebook" class="facebook-btn"><img class="social-button" src="/img/fbbutton.png"  alt="sign in with facebook" /></a>
+	<br/>
+	<a href="/auth/google"><img class="social-button google-btn" src="/img/googlebutton.png" alt="sign in with google" /></a>
+
+
+
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/signinorlogin.js"></script>
 	<script type="text/javascript" src="/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<form action="/post/new" method="POST" >
+
+	<h3 class="make-new-post">Make a new post:</h3>
+	<div class="form-group">
+		<label for="title">title:</label>
+		<input type="text" name="title" placeholder="title" id="title" class="form-control"/>
+		<br/>
+  	</div>
+
+	<div class="form-group">
+		<label for="description">description:</label>
+		<textarea name="description" placeholder="write some text for your post" id="description" class="form-control description-input"></textarea>
+		<br/>
+  	</div>
+
+	<div class="form-group">
+		<label for="post-image">Paste a link to an image you want <br/> to use in your post:</label>
+		<input type="text" name="image" placeholder="http://site.com/myimg.jpg" id="post-image" class="form-control"/>
+		<br/>
+	</div>
+
+	<p> -- OR -- </p>
+
+	<div class="form-group">
+		<label for="img-search">Search for a gif:</label>
+		<input type="text"  placeholder="dog pics" id="img-search" class="form-control"/> 
+		<button class="btn" type="button" id="search-btn">Search</button>
+		<br/>
+	</div>
+
+	<img id="search-img-0" class="search-img"/>
+	<img id="search-img-1" class="search-img"/>
+	<img id="search-img-2" class="search-img"/>
+	<img id="search-img-3" class="search-img"/>
+	<img id="search-img-4" class="search-img"/>
+	<img id="search-img-5" class="search-img"/>
+
+	<br/>
+	<br/>
+
+	<input type="submit" class="btn btn-primary" />
+</form>
+

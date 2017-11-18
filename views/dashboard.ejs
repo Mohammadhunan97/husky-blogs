@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Husky Blogs Dashboard</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+	<h1 class="husky-logo">Husky Blogs</h1>
+	<button class="btn btn-red" id="make-new-post">Make a New Post</button>
+	<div class="my-new-post" id="my-new-post">
+		<% include ./partials/newpost %>
+	</div>
+	<br/>
+
+
+	<% posts.forEach(function(post){ %>
+		<hr/>
+		<div class="following-post">
+			<div class="following-user">
+				<br/>
+				<br/>
+				<p>Posted By</p>
+				<img src=<%= post.bloggerpic%> class="user-image"/>
+				<p><%= post.bloggername %></p>
+				<br/>
+				<button class="btn">Reblog This Post</button>
+			</div>
+			<div class="user-post">
+				<h3><%= post.title%></h3>
+				<img src=<%= post.image %> class="post-image" />
+				<p class="post-description"><%= post.description %></p>
+			</div>
+		</div>
+		<hr/>
+	<% })%>
+
+
+	<script type="text/javascript" src="/dashboard.js"></script>
+</body>
+</html>
