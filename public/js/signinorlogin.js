@@ -1,4 +1,5 @@
-function signInOrLogin(){
+function signInOrLogin()
+{
 	signButtonClickCount++;
 	if(signButtonClickCount%2 === 0){ 
 		$('#signup').css('display','inline');

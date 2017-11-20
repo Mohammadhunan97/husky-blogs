@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Husky Blogs Dashboard</title>
+	<title>Husky Blogs Explore</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="/css/style.css" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<a href="/profile" class="navigational">Profile</a>
+	<a href="/dashboard">Dashboard</a>
 	<h1 class="husky-logo">
 		Husky Blogs
 		<br/>
 		<% include ./partials/searchbutton %>
 	</h1>
 
-	<button class="btn btn-red" id="make-new-post">Make a New Post</button>
-	<div class="my-new-post" id="my-new-post">
-		<% include ./partials/newpost %>
-	</div>
+	<h2> <%= info.search.title %> </h2>
+
 	<br/>
 
 
-	<% posts.forEach((post) =>{ %>
+	<% info.posts.forEach((post) =>{ %>
 		<hr/>
 		<div class="following-post">
 			<div class="following-user">
@@ -32,6 +31,9 @@
 				<p><%= post.bloggername %></p>
 				<br/>
 				<button class="btn">Reblog This Post</button>
+				<br/>
+				<br/>
+				<button class="btn btn-red">Follow This User</button>
 			</div>
 			<div class="user-post">
 				<h3><%= post.title%></h3>

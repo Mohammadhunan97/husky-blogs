@@ -77,6 +77,15 @@ label{
     padding-top: 45px;
     background-position: 0%;
 }
+.selected-img{
+  border: 2px solid #f1c40f;
+}
+.not-selected{
+  border: 2px solid black;
+}
+.navigational{
+  margin-left: 60vw;
+}
 .flip-vertical-left {
 	-webkit-animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 	animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
@@ -160,4 +169,15 @@ label{
   	-webkit-transform: translateZ(0) translateY(0);
             transform: translateZ(0) translateY(0);
   }
+}
+
+
+
+@media screen and (max-width: 700px) {
+    .following-post {
+       flex-direction: column;
+    }
+    .following-user {
+      order: 2;
+    }
 }

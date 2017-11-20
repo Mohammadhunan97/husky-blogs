@@ -45,6 +45,40 @@ app.get('/dashboard',(req,res)=>{
 	res.render('dashboard', {posts: posts});
 })
 
+app.get('/explore/:search',(req,res) => {
+	//Posts.find({tags.contain(req.params.search)}) => res.render('explore',{posts: posts})
+	let posts = [
+	{
+		title: 'Eren Yeager',
+		description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tempor arcu arcu, ut rhoncus orci laoreet non. Morbi nibh quam, porttitor eu neque quis, finibus tincidunt sapien. Vestibulum elementum velit maximus consectetur suscipit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis porttitor molestie malesuada. Nam lorem lectus, imperdiet vitae orci sit amet, consectetur finibus odio. Donec auctor egestas sollicitudin. Aenean egestas nibh pulvinar, posuere urna a, gravida turpis. Sed id semper velit. Etiam ex tellus, imperdiet vel elit non, maximus euismod velit. Nam tincidunt eu lorem id tristique.',
+		image: 'https://media0.giphy.com/media/tliXLSkzfq2C4/giphy.gif',
+		original_poster: 'o.g_aot',
+		bloggerpic: 'https://vignette.wikia.nocookie.net/parksandrecreation/images/0/0a/Ben.jpg/revision/latest?cb=20110809181418',
+		bloggername: 'ben wyatt'
+
+	},
+	{
+		title: 'Mikasa is cool',
+		description: 'Etiam nec mi in ipsum fringilla vehicula vitae at arcu. Integer efficitur bibendum porttitor. Praesent rutrum ex nunc, gravida rhoncus odio accumsan in. Donec dolor ligula, lobortis vel odio vitae, tincidunt mollis ipsum. Integer molestie feugiat turpis, a iaculis tortor mollis quis. Nullam dapibus dignissim turpis at congue. Vestibulum gravida non turpis a euismod. Fusce vestibulum elit id dui eleifend blandit. Cras dignissim quis est vitae commodo. Sed sed nisi augue. Praesent fermentum vitae odio in accumsan. Etiam lorem turpis, sollicitudin tincidunt porttitor ut, rhoncus ac ante. Ut euismod ipsum at odio maximus hendrerit.',
+		image: 'https://media2.giphy.com/media/BvB5HkZgH36W4/giphy.gif',
+		original_poster: 'o.g_aot',
+		bloggerpic: 'http://www.billboard.com/files/styles/article_main_image/public/media/Amy-Poehler-Leslie-Knope-parks-rec-billboard-1548.jpg',
+		bloggername: 'leslter_knapoff'
+
+	}
+	];
+	let search = {
+		title: req.params.search
+	}
+	let info = {
+		posts,
+		search,
+	}
+
+
+	res.render("explore", {info,});
+})
+
 app.listen(port,(error) => {
 	if(error) {
 		console.log(error);
