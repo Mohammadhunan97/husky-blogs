@@ -37,7 +37,8 @@ Router.post('/login',(req,res)=>{
 displayRoutes.addRoute({type:'post',url:'/localuser/login/'})
 
 Router.post('/new',(req,res) => {
-	if(req.body.password === req.body.password2){
+	let errors = [];
+	if(req.body.password === req.body.password2 && (req.body.password) && (req.body.email)){
 		let newuser 		= new User;
 		newuser.lastupdated = Date.now();
 		newuser.username 	= req.body.username;
@@ -46,15 +47,25 @@ Router.post('/new',(req,res) => {
 		newuser.facebookid  = null;
 
 		newuser.save((err, user) => {
-			if(err){ 
-				res.send(err);
+			if(err){
+				try{
+					errors.push(err.errors.username.message)
+				}catch(err){ console.log(err) }
+				if(err.errmsg){
+					errors.push(err.errmsg);
+				}
+				res.render('homepage',{errors,})
 			}else{
 				req.session.localUser = user;
 				res.redirect("/user/one/"+user._id);
 			}		
 		})
 	}else{
-		res.redirect("/"); // redirect with some message of incorrect login
+		if(!req.body.username) errors.push('username required');
+		if(!req.body.password) errors.push('password required');
+		if(!req.body.email) errors.push('email required');
+		if(req.body.password !== req.body.password2) errors.push('passwords must be the same');
+		res.render('homepage',{errors,}); // redirect with some message of incorrect login
 	}
 	
 })
@@ -72,6 +83,9 @@ Router.put('/update/:id',(req,res) => {
 				user.save((err,user)=> {
 					if(err){ 
 						res.send(err);
+						if(err.code === 11000){
+							res.redirect('/')
+						}
 					}else{
 						req.session.localUser = user;
 						res.redirect("/user/"+user._id);

@@ -15,7 +15,7 @@ const express 	   = require('express'),
 	userRoutes 	   = require('./routes/user.routes'),
 
 
-	db			   = key.remoteURL || 'mongodb://localhost/'+key.db,
+	db			   = key.remoteURL || 'mongodb://localhost/db21',
 	port		   = process.env.PORT || 3000;
 
 mongoose.connect(db);
@@ -54,11 +54,11 @@ app.use('/user/',userRoutes);
 
 app.use(express.static('public'));
 
-	
+
 app.get('/',(req,res) => {
 	res.render('homepage',{errors: [],successes:[]});
 })	
-
+app.get('*',(req,res)=>{ res.redirect('/')});
 
 displayRoutes.addRoute({type:'get',url:'/'})
 displayRoutes.viewRoutes();

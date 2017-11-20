@@ -8,6 +8,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+	<% if(errors) {%>
+		<% errors.forEach((err)=>{ %>
+			<p class="alert alert-danger"> <%= err %></p>
+		<% }) %>
+	<% } %>
 	<h1 class="logo">Husky Blogs</h1>
 	<div id="signup">
 		<% include ./partials/signup %>
