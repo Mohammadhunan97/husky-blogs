@@ -86,6 +86,10 @@ label{
 .navigational{
   margin-left: 60vw;
 }
+.follower-account,.following-account{
+  display: inline-block;
+  margin: 5px;
+}
 .flip-vertical-left {
 	-webkit-animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 	animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
