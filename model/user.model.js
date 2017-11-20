@@ -1,24 +1,15 @@
-const mongoose = require('mongoose'),
-	Schema = mongoose.Schema,
-	Post = required('./post.model');
+const mongoose = require('mongoose'), 
+	Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-	facebookid: {
-		type: String,
-		required: false, // only required for facebook users
-		unique: true,
-		default: null
-	},
-	googleid: {
-		type: String,
-		required: false, // only required for google users
-		unique: true,
-		default: null
-	},
-	email: {
-		type: String,
+	timecreated: {
+		type: Date,
 		required: true,
-		unique: true
+		default: Date.now()
+	},
+	lastupdated: {
+		type: Date,
+		required: true
 	},
 	username: {
 		type: String,
@@ -27,27 +18,17 @@ let UserSchema = new Schema({
 	},
 	password: {
 		type: String,
-		required: false, //only required for local users
-		unique: false,
-		default: null
+		required: false //only required for local users
 	},
-	profile_pic: {
-		type: String, 
-		required: false,
-		unique: false,
-		default: '/profilepic.png' 
+	googleid: {
+		type: Number,
+		required: false //only needed for google users
 	},
-	following: {
-		type: [Number], 
-		required: false,
-		unique: false
-	},
-	followers: {
-		type: [Number],
-		required: false,
-		unique: false
-	},
-	posts: [Posts]
+	facebookid: {
+		type: Number,
+		required: false //only needed for facebook users
+	}
 })
+
 
 module.exports = mongoose.model('User',UserSchema);
