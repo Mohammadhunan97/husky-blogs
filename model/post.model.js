@@ -2,11 +2,20 @@ const mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 let PostSchema = new Schema({
+	timecreated: {
+		type: Date,
+		required: true,
+		default: Date.now()
+	},
+	lastupdated: {
+		type: Date,
+		required: true
+	},
 	title: {
 		type: String,
 		required: false,
 		unique: false
-	}
+	},
 	description: {
 		type: String,
 		required: false,
@@ -29,4 +38,4 @@ let PostSchema = new Schema({
 })
 
 
-module.exports = mongoose.model('Post',PostSchema);
+// module.exports = mongoose.model('Post',PostSchema);

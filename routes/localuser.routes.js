@@ -7,19 +7,7 @@
 const Router 	   = require('express').Router(),
 	User		   = require('../model/user.model'),
 	bcrypt 		   = require('bcryptjs'),
-	salt 	 	   = bcrypt.genSaltSync(10),
-	displayRoutes  = require('../config/displayroutes');
-
-
-/* NOTE: the route /localuser/index below is purely for debugging/testing 
-	purposes it is highly recommended hat you don't use this route in production */
-
-// Router.get('/index',(req,res) => {
-// 	User.find({}).exec((error,user) => {
-// 		if(error) res.send(error);
-// 		res.send(user);
-// 	})
-// })
+	salt 	 	   = bcrypt.genSaltSync(10);
 
 
 
@@ -34,13 +22,13 @@ Router.post('/login',(req,res)=>{
 		}
 	})
 })
-displayRoutes.addRoute({type:'post',url:'/localuser/login/'})
 
 Router.post('/new',(req,res) => {
 	let errors = [];
-	if(req.body.password === req.body.password2 && (req.body.password) && (req.body.email)){
+	if((req.body.password === req.body.password2) && (req.body.password) && (req.body.email)){
 		let newuser 		= new User;
 		newuser.lastupdated = Date.now();
+		newuser.email 		= req.body.email;
 		newuser.username 	= req.body.username;
 		newuser.password 	= bcrypt.hashSync(req.body.password,salt); 
 		newuser.googleid 	= null;
@@ -48,11 +36,14 @@ Router.post('/new',(req,res) => {
 
 		newuser.save((err, user) => {
 			if(err){
-				try{
-					errors.push(err.errors.username.message)
-				}catch(err){ console.log(err) }
-				if(err.errmsg){
-					errors.push(err.errmsg);
+				if(err.code === 11000){
+					// errors.push('username must be unique '+ req.body.username + ' is already used')
+					console.log('\n')
+					console.log('\n')
+					console.log(err.toJSON())
+					console.log('\n')
+					console.log('\n')
+					console.log(err.toString())
 				}
 				res.render('homepage',{errors,})
 			}else{
@@ -61,6 +52,10 @@ Router.post('/new',(req,res) => {
 			}		
 		})
 	}else{
+		console.log('req.body.password === req.body.password2','\t',req.body.password === req.body.password2);
+		console.log('req.body.password','\t',req.body.password);
+		console.log('req.body.email','\t',req.body.email);
+
 		if(!req.body.username) errors.push('username required');
 		if(!req.body.password) errors.push('password required');
 		if(!req.body.email) errors.push('email required');
@@ -69,7 +64,6 @@ Router.post('/new',(req,res) => {
 	}
 	
 })
-displayRoutes.addRoute({type:'post',url:'/localuser/new/'})
 
 
 Router.put('/update/:id',(req,res) => {
@@ -95,7 +89,6 @@ Router.put('/update/:id',(req,res) => {
 		})
 	}
 })
-displayRoutes.addRoute({type:'put',url:'/localuser/update/:id'})
 
 Router.delete('/delete/:id',(req,res) => {
 	if(req.session.localUser && req.session.localUser._id === req.params.id) {
@@ -105,6 +98,5 @@ Router.delete('/delete/:id',(req,res) => {
 		})
 	}
 })
-displayRoutes.addRoute({type:'delete',url:'/localuser/delete/:id'})
 
 module.exports = Router;

@@ -10,12 +10,11 @@ const express 	   = require('express'),
 	fs 			   = require('fs');
 	key 	  	   = require('./key'),
 
-	displayRoutes  = require('./config/displayroutes'),
 	localRoutes    = require('./routes/localuser.routes'),
 	userRoutes 	   = require('./routes/user.routes'),
 
 
-	db			   = key.remoteURL || 'mongodb://localhost/db21',
+	db			   = key.remoteURL || 'mongodb://localhost/db22',
 	port		   = process.env.PORT || 3000;
 
 mongoose.connect(db);
@@ -59,10 +58,6 @@ app.get('/',(req,res) => {
 	res.render('homepage',{errors: [],successes:[]});
 })	
 app.get('*',(req,res)=>{ res.redirect('/')});
-
-displayRoutes.addRoute({type:'get',url:'/'})
-displayRoutes.viewRoutes();
-
 
 app.listen(port,(error)=>{
 	if(error){
