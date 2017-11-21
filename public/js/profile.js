@@ -1,5 +1,5 @@
 $(document).ready(()=>{
 	$('#explorer').click(() => {
-		window.location = "/explore/" + $('#searcher').val();
+		window.location = "/user/explore/" + $('#searcher').val();
 	})
 })
