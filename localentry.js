@@ -14,7 +14,7 @@ const express 	   = require('express'),
 	userRoutes 	   = require('./routes/user.routes'),
 
 
-	db			   = key.remoteURL || 'mongodb://localhost/db22',
+	db			   = key.remoteURL || 'mongodb://localhost/db23',
 	port		   = process.env.PORT || 3000;
 
 mongoose.connect(db);

@@ -90,6 +90,12 @@ label{
   display: inline-block;
   margin: 5px;
 }
+.user-profile-pic {
+  width: 250px;
+  height: auto;
+  border: 2px solid black;
+  padding: 15px;
+}
 .flip-vertical-left {
 	-webkit-animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 	animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
