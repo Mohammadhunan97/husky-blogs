@@ -28,8 +28,7 @@ let PostSchema = new Schema({
 	},
 	original_poster: {
 		type: String,
-		required: true,
-		unique: true
+		required: true
 	},
 	tags: {
 		type: [String],
@@ -37,5 +36,6 @@ let PostSchema = new Schema({
 	}
 })
 
+module.exports = PostSchema;
 
 // module.exports = mongoose.model('Post',PostSchema);

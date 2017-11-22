@@ -28,6 +28,22 @@ $(document).ready(() => {
 		window.location = "/user/explore/" + $('#searcher').val();
 	})
 
+
+	$(document).ready(function() {
+	  $(window).keydown(function(event){
+	    if(event.keyCode == 13) {
+	      event.preventDefault();
+	      return false;
+	    }
+	  });
+	});
+
+	// $('#new-post-form').submit((e)=> {
+	// 	e.preventDefault();
+	// 	console.log(e.target.value);
+	// 	console.log(e.target.tags.value)
+	// })
+
 })
 
 

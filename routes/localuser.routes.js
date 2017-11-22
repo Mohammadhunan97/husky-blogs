@@ -38,12 +38,6 @@ Router.post('/new',(req,res) => {
 			if(err){
 				if(err.code === 11000){
 					// errors.push('username must be unique '+ req.body.username + ' is already used')
-					console.log('\n')
-					console.log('\n')
-					console.log(err.toJSON())
-					console.log('\n')
-					console.log('\n')
-					console.log(err.toString())
 
 					if(err.errmsg.includes('username')){
 						errors.push('username must be unique '+ req.body.username + ' is already used')
@@ -51,7 +45,7 @@ Router.post('/new',(req,res) => {
 					if(err.errmsg.includes('email')){
 						errors.push('email must be unique '+ req.body.email + ' is already used')
 					}
-
+					console.log(err)
 				}
 				res.render('homepage',{errors,})
 			}else{

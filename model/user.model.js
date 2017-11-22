@@ -1,7 +1,7 @@
 const mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	PostSchema = require('./post.model');
-
+// console.log('baz',PostSchema)
 let UserSchema = new Schema({
 	timecreated: {
 		type: Date,

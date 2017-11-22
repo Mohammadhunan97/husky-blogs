@@ -1,7 +1,8 @@
 /*
 	this page is for a compilation of all routes for all user, regardless of whether its a passport or local user
 */
-const Router 	 	 = require('express').Router();
+const Router 	 	 = require('express').Router(),
+	User 			 = require('../model/user.model');
 
 Router.get('/one/:id',(req,res) => {
 		//profile is the users data 
@@ -92,10 +93,10 @@ Router.get('/dashboard',(req,res) => {
 
 	if(req.isAuthenticated() && req.user._id == req.params.id) {
 		// res.render('profile',{user: req.user});
-		res.render('dashboard', {posts: posts,user,});
+		res.render('dashboard', {posts: posts,user, errors:[],successes:[]});
 	}else if(req.session.localUser){
 		// res.render('profile',{user: req.session.localUser});
-		res.render('dashboard', {posts: posts, user});
+		res.render('dashboard', {posts: posts, user, errors:[],successes:[]});
 	}else{
 		res.redirect('/');
 	}
@@ -141,6 +142,62 @@ Router.get('/explore/:search',(req,res) => {
 		res.render("explore", {info,user,});
 	}else{
 		res.redirect('/');
+	}
+})
+
+// user/post/new (new post by a user id)
+Router.post('/post/new',(req,res) =>{
+	if(req.isAuthenticated() && req.user._id == req.params.id) {
+		User.findById(req.user._id,(err,user)=> {
+			let post = {
+				lastupdated: Date.now(),
+				title: req.body.title,
+				description: req.body.description,
+				image: req.body.image,
+				original_poster: user._id,
+				tags: req.body.tags
+			}
+			user.posts.push(post);
+			user.save((err,user) => {
+				if(err){
+					console.log(err);
+				}else{
+					console.log(user);
+				}
+			})
+		})
+	}else if(req.session.localUser){
+		User.findById(req.session.localUser,(err,user)=> {
+			// console.log(req.body);
+			// if(typeof req.body.tags === Array) {
+			// 	req.body.tags.forEach((tag) => {
+			// 		console.log('\n',tag,'\t');
+			// 	})
+			// }else{ console.log(typeof req.body.tags)}
+
+			let reqtags = req.body.tags.replace(/\s/g, '');
+			let tags = reqtags.split(',');
+
+			let post = {
+				lastupdated: Date.now(),
+				title: req.body.title,
+				description: req.body.description,
+				image: req.body.image,
+				original_poster: user._id,
+				tags: tags
+			}
+			user.posts.push(post);
+			user.save((err,user) => {
+				if(err){
+					console.log(err);
+					res.redirect('/user/dashboard');
+				}else{
+					res.redirect('/user/dashboard');
+				}
+			})
+		})
+	}else{
+		res.render('homepage',{errors:['please log in']});
 	}
 })
 
