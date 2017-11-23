@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<a href="/user/one/<%= user.id %>" class="navigational">Profile</a>
+	<a href="/user/one/<%= user._id %>" class="navigational">Profile</a>
 	<a href="/user/dashboard">Dashboard</a>
 	<h1 class="husky-logo">
 		Husky Blogs
@@ -15,12 +15,12 @@
 		<% include ./partials/searchbutton %>
 	</h1>
 
-	<h2> <%= info.search.title %> </h2>
+	<h2> <%= search.title %> </h2>
 
 	<br/>
 
 
-	<% info.posts.forEach((post) =>{ %>
+	<% queryposts.forEach((post) =>{ %>
 		<hr/>
 		<div class="following-post">
 			<div class="following-user">
@@ -28,7 +28,7 @@
 				<br/>
 				<p>Posted By</p>
 				<img src=<%= post.bloggerpic%> class="user-image"/>
-				<p><%= post.bloggername %></p>
+				<a href="/user/one/<%= post.original_poster.id %>"><%= post.original_poster.username %></a>
 				<br/>
 				<button class="btn">Reblog This Post</button>
 				<br/>

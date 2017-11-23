@@ -70,13 +70,11 @@ Router.get('/dashboard',(req,res) => {
 		// user.id = req.user._id;
 		// user.posts = req.user.posts;
 		user = req.user;
-		console.log(user.posts);
 		res.render('dashboard', {user, errors:[],successes:[]});
 	}else if(req.session.localUser){
 		// user.id = req.session.localUser._id;
 		// user.posts = req.session.localUser.posts;
 		user = req.session.localUser;
-		console.log(user.posts);
 		res.render('dashboard', {user, errors:[],successes:[]});
 	}else{
 		res.redirect('/');
@@ -85,35 +83,33 @@ Router.get('/dashboard',(req,res) => {
 })
 
 Router.get('/explore/:search',(req,res) => {
-	//Posts.find({tags.contain(req.params.search)}) => res.render('explore',{posts: posts})
-	let user = {};
-	let posts = [{}];
 
-	let search = {
-		title: req.params.search
-	}
-	let info = {
-		posts,
-		search,
-	}
+let queryposts = [],
+	search = { title: req.params.search };
 
-	User.find({ posts: {
-		tags:req.params.search
-		}
-	},(err,user)=> {
-		console.log(user)
+User.find({},(err,users) => {
+	users.forEach((user,i) => {
+		user.posts.forEach((post,i) => {
+			//console.log(post.tags.includes(search.title))
+			if(post.tags.includes(search.title)){
+				queryposts.push(post);
+				console.log(queryposts.length)
+			}
+		})
 	})
-
+})
 
 	if(req.isAuthenticated() && req.user._id == req.params.id) {
-		user = req.user;
-		res.render("explore", {info,user,});
 
+		console.log('req is isAuthenticated')
+		res.render("explore", {queryposts: queryposts,search,user,});
 
 
 	}else if(req.session.localUser){
 		user = req.session.localUser;
-		res.render("explore", {info,user,});
+		setTimeout(()=> {
+			res.render("explore",{queryposts,search,user,});
+		},1000)
 	}else{
 		res.redirect('/');
 	}
@@ -145,12 +141,6 @@ Router.post('/post/new',(req,res) =>{
 		})
 	}else if(req.session.localUser){
 		User.findById(req.session.localUser,(err,user)=> {
-			// console.log(req.body);
-			// if(typeof req.body.tags === Array) {
-			// 	req.body.tags.forEach((tag) => {
-			// 		console.log('\n',tag,'\t');
-			// 	})
-			// }else{ console.log(typeof req.body.tags)}
 
 			let reqtags = req.body.tags.replace(/\s/g, '');
 			let tags = reqtags.split(',');
@@ -169,7 +159,6 @@ Router.post('/post/new',(req,res) =>{
 			user.posts.push(post);
 			user.save((err,user) => {
 				if(err){
-					console.log(err);
 					res.redirect('/user/dashboard');
 				}else{
 					res.redirect('/user/dashboard');
