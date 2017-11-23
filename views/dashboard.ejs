@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-	<a href="/user/one/<%= user.id %>" class="navigational">Profile</a>
+	<a href="/user/one/<%= user._id %>" class="navigational">Profile</a>
 	<h1 class="husky-logo">
 		Husky Blogs
 		<br/>
@@ -34,7 +34,7 @@
 		<% }) %>
 	<% } %>
 
-	<% posts.forEach((post) =>{ %>
+	<% user.posts.forEach((post) =>{ %>
 		<hr/>
 		<div class="following-post">
 			<div class="following-user">
@@ -42,7 +42,7 @@
 				<br/>
 				<p>Posted By</p>
 				<img src=<%= post.bloggerpic%> class="user-image"/>
-				<p><%= post.bloggername %></p>
+				<a href="/user/one/<%= post.original_poster.id %>"><%= post.original_poster.username %></a>
 				<br/>
 				<button class="btn">Reblog This Post</button>
 			</div>
@@ -50,6 +50,11 @@
 				<h3><%= post.title%></h3>
 				<img src=<%= post.image %> class="post-image" />
 				<p class="post-description"><%= post.description %></p>
+				<% post.tags.forEach((tag) => { %>
+				<p class="post-tags">
+					<a href="/user/explore/<%= tag %>" target="_blank"><%= tag %></a>
+				</p>
+				<% }) %>
 			</div>
 		</div>
 		<hr/>

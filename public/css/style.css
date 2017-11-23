@@ -59,7 +59,7 @@ label{
 	width: 400px;
 }
 .post-description{
-	text-align: justify;
+	text-align: center;
 	margin-left: 40px;
 	margin-right: 40px;
 }
@@ -95,6 +95,11 @@ label{
   height: auto;
   border: 2px solid black;
   padding: 15px;
+}
+.post-tags{
+  background-color: #eee;
+  display: inline-block;
+  padding: 10px;
 }
 .flip-vertical-left {
 	-webkit-animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;

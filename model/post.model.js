@@ -26,9 +26,15 @@ let PostSchema = new Schema({
 		required: false,
 		unique: false
 	},
-	original_poster: {
-		type: String,
-		required: true
+	original_poster: {  //used to later show a link to the users page <a href="/follow/{id}">follow username</a>
+		id: {
+			type: String,
+			required: true
+		},
+		username: {
+			type: String,
+			required: true
+		}
 	},
 	tags: {
 		type: [String],
@@ -39,3 +45,4 @@ let PostSchema = new Schema({
 module.exports = PostSchema;
 
 // module.exports = mongoose.model('Post',PostSchema);
+
